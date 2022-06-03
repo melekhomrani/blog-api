@@ -5,7 +5,7 @@ const app = express();
 const blogRouter = require("./routers/blogRouter");
 const port = 3000;
 
-// set database
+// set database 
 mongoose
   .connect("mongodb://localhost/Chats", {
     useNewUrlParser: true,
@@ -32,6 +32,5 @@ app.use(blogRouter);
 // render error page
 app.use((req, res) => {
   let context = { title: "Error" };
-  // res.status(404).sendFile("./views/404.html", { root: __dirname });
   res.status(404).render("404", context);
 });
