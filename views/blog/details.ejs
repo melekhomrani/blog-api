@@ -1,0 +1,39 @@
+<html lang="en">
+
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include ("../partials/nav.ejs")%>
+      <div class="container">
+        <div class="blogs content">
+          <h2 class="my-5 text-center">All Blogs</h2>
+        </div>
+        <div class="container">
+          <div class="col border border-dark my-2 rounded p-2">
+            <div class="d-flex justify-content-between">
+              <h4 class="d-inline-block">
+                <%= blog.name %>
+              </h4>
+              <button class="btn btn-danger" data-ident="<%= blog._id %>" onclick="deleteBlog();">Delete
+              </button>
+            </div>
+            <p class="">
+              <%= blog.body %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <%- include ("../partials/footer.ejs") %>
+
+        <script>
+          function deleteBlog() {
+            fetch("/blogs/<%= blog._id %>", {
+              method: "delete",
+            }).then((res) => window.location.href = res.json())
+              .then((data) => window.location.href = data.redirect)
+              .catch((e) => console.log(e));
+          }
+        </script>
+  </body>
+
+</html>
